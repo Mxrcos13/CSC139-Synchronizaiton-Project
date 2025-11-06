@@ -8,6 +8,8 @@ extern pthread_cond_t cond_empty;
 extern sem_t sem_full;
 extern sem_t sem_empty;
 
-// function prototypes
+#define BUFFER_SIZE 5
+
+// function proto types
 void insert_request(int request, int sync_type);
 int remove_request(int sync_type);
