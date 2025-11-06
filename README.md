@@ -46,11 +46,13 @@ Finished successfully.
 
 
 ## 🧵 How It Works
-
-- The producer thread generates a fixed number of requests (num in main.c) and inserts them into the shared buffer.
+```
+- The producer thread generates a given number of requests and inserts them into the shared buffer.
 
 - The consumer thread removes those requests one at a time.
 
 - The buffer operations (insert_request() and remove_request()) are implemented in buffer.c.
 
 - Each synchronization type controls access to the buffer differently, demonstrating how synchronization affects concurrency.
+
+```
