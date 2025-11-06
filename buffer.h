@@ -10,6 +10,9 @@ extern sem_t sem_empty;
 
 #define BUFFER_SIZE 5
 
+// num of requests CHANGE LATTER
+extern int num;
+
 // function proto types
 void insert_request(int request, int sync_type);
 int remove_request(int sync_type);

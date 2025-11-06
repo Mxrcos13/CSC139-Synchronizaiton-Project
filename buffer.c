@@ -21,8 +21,8 @@ void insert_request(int request, int sync_type) {
 
         pthread_mutex_lock(&mutex);
         buffer[in] = request;
-        printf("Mutex request");
-        in++;
+        printf("Mutex produce request");
+        in = (in + 1) % BUFFER_SIZE;
         pthread_mutex_unlock(&mutex);
 
     }else if(sync_type == 2){ // condition variables
@@ -32,31 +32,57 @@ void insert_request(int request, int sync_type) {
             pthread_cond_wait(&cond_empty, &mutex);
         }
         buffer[in] = request;
-        printf("Mutex request");
-        in++;
+        printf("Conditional Variable produce request");
+        in = (in + 1) % BUFFER_SIZE;
+        pthread_cond_signal(&cond_full); 
         pthread_mutex_unlock(&mutex);
 
-    }else if(sync_type == 3){ // semaphores
-
+    }else if(sync_type == 3){ // semaphoreproduce s
+        sem_wait(&sem_empty);
+        buffer[in] = request;
+        printf("Semphore produce request");
+        in = (in + 1) % BUFFER_SIZE;
+        sem_post(&sem_full);
     }
+
     else{
-        printf("Invalud Request");
+        printf("Invalid produce Request");
         exit(1);
     }
 
 }
 
 int remove_request(int sync_type) {
-    
-    if (sync_type == 1) { // mutex only
+    int request;
+    if(sync_type == 1){
+        pthread_mutex_lock(&mutex);
+        request = buffer[out];
+        printf("Mutex consume request");
+        out = (out + 1) % BUFFER_SIZE;
+        pthread_mutex_unlock(&mutex);
 
     }else if(sync_type == 2){ // condition variables
-        
-    }else if(sync_type == 3){ // semaphores
 
+        pthread_mutex_lock(&mutex);
+        while (in == out) { // Buffer empty
+            pthread_cond_wait(&cond_full, &mutex);
+        }
+        request = buffer[out];
+        printf("Conditional Variable consume request");
+        out = (out + 1) % BUFFER_SIZE;
+        pthread_cond_signal(&cond_empty);
+        pthread_mutex_unlock(&mutex);
+
+    }else if(sync_type == 3){ // semaphores
+        sem_wait(&sem_full);
+        request = buffer[out];
+        printf("Semphore consume request");
+        out = (out + 1) % BUFFER_SIZE;
+        sem_post(&sem_empty);
     }
     else{
-        printf("Invalud Request");
+        printf("Invalid consume Request");
         exit(1);
     }
+    return request;
 }
