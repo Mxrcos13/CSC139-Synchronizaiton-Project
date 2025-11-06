@@ -30,23 +30,24 @@ gcc main.c buffer.c producer.c consumer.c -o server -lpthread
 
 ## 🚀 How to Run
 
+```
 ./server 1  {number of requests} # Run using Mutex locks
 ./server 2  {number of requests} # Run using Condition Variables
 ./server 3  {number of requests} # Run using Semaphores
-
+```
 
 ## 🧩 Example Output
-
+```
 Using Semaphores Synchronization...
 Semaphore produced request #1
 Semaphore consumed request #1
 Semaphore produced request #2
 Semaphore consumed request #2
 Finished successfully.
-
+```
 
 ## 🧵 How It Works
-```
+
 - The producer thread generates a given number of requests and inserts them into the shared buffer.
 
 - The consumer thread removes those requests one at a time.
@@ -55,4 +56,3 @@ Finished successfully.
 
 - Each synchronization type controls access to the buffer differently, demonstrating how synchronization affects concurrency.
 
-```
