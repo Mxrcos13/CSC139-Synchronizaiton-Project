@@ -9,6 +9,8 @@ void* consumer(void* arg) {
 
     for(int i = 0; i < num; i++){
         remove_request(sync_type); //sync type
+
+        sleep(rand() % 3 + 1); // sleep 1–3 seconds
     }
     pthread_exit(NULL); // close thread
 

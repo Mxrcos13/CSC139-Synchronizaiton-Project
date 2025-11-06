@@ -9,6 +9,8 @@ void* producer(void* arg) {
 
     for(int i = 0; i < num; i++){
         insert_request(i + 1, sync_type); // request number and sync type
+        
+        sleep(rand() % 2 + 1); // sleep 1–2 seconds 
     }
     
     pthread_exit(NULL); // close thread
