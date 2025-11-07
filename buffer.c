@@ -1,3 +1,9 @@
+/*
+ * Name: Marcos Pantoja & Daniela Perez 
+ * Date: 11-06-2025
+ * Purpose of Code: Defines how buffer requests will be inserted/ removed by the producer/ consumer for each synchronization type.
+ */
+
 #include "buffer.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -44,7 +50,7 @@ void insert_request(int request, int sync_type) {
         pthread_cond_signal(&cond_full); 
         pthread_mutex_unlock(&mutex);
 
-    }else if(sync_type == 3){ // semaphoreproduce s
+    }else if(sync_type == 3){ // semaphores
         sem_wait(&sem_empty);
         buffer[in] = request;
         printf("Semphore produce request #%d\n", request);
@@ -61,7 +67,7 @@ void insert_request(int request, int sync_type) {
 
 int remove_request(int sync_type) {
     int request;
-    if(sync_type == 1){
+    if(sync_type == 1){ // mutex
         pthread_mutex_lock(&mutex);
 
         if ((in == out)){

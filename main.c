@@ -1,3 +1,9 @@
+/*
+ * Name: Marcos Pantoja & Daniela Perez 
+ * Date: 11-06-2025
+ * Purpose of Code: Defines synchronization types and creates/ joins threads. 
+ */
+
 #include "buffer.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -57,9 +63,17 @@ int main(int argc, char* argv[]) {
     pthread_create(&producer_thread, NULL, producer, &sync_type);
     pthread_create(&consumer_thread, NULL, consumer, &sync_type);
 
+    // testing 
+    // pthread_create(&producer_thread, NULL, producer, &sync_type); // creating extra producer 
+    // pthread_create(&consumer_thread, NULL, consumer, &sync_type);   // create extra consumer
+
     // wait for threads to finish
     pthread_join(producer_thread, NULL);
     pthread_join(consumer_thread, NULL);
+
+    // testing 
+    // pthread_join(producer_thread, NULL);    // joining extra producer
+    // pthread_join(consumer_thread, NULL);
 
     printf("Finished successfully.\n");
     return 0;

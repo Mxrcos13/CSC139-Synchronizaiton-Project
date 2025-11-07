@@ -1,3 +1,9 @@
+/*
+ * Name: Marcos Pantoja & Daniela Perez 
+ * Date: 11-06-2025
+ * Purpose of Code: Simulates incoming web traffic to server.
+ */
+
 #include "buffer.h"
 #include <stdio.h>
 #include <stdlib.h>

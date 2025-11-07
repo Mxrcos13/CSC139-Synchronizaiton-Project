@@ -1,3 +1,9 @@
+/*
+ * Name: Marcos Pantoja & Daniela Perez 
+ * Date: 11-06-2025
+ * Purpose of Code: Defines global variables and prototypes.
+ */
+
 #include <pthread.h>
 #include <semaphore.h>
 
@@ -13,6 +19,6 @@ extern sem_t sem_empty;
 // num of requests CHANGE LATTER
 extern int num;
 
-// function proto types
+// function prototypes
 void insert_request(int request, int sync_type);
 int remove_request(int sync_type);
